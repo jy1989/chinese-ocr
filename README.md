@@ -12,6 +12,8 @@
 sh setup.sh
 ##CPU环境
 sh setup-cpu.sh
+##CPU python3环境
+sh setup-python3.sh
 ```
 
 # 模型训练
