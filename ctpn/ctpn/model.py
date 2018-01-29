@@ -14,13 +14,20 @@ def load_tf_model():
     cfg.TEST.HAS_RPN = True  # Use RPN for proposals
     # init session
     config = tf.ConfigProto(allow_soft_placement=True)
-    sess = tf.Session(config=config)
     # load network
     net = get_network("VGGnet_test")
     # load model
     saver = tf.train.Saver()
+    # sess = tf.Session(config=config)
+    sess = tf.Session()
     ckpt = tf.train.get_checkpoint_state('ctpn/models/')
+    reader = tf.train.NewCheckpointReader(ckpt.model_checkpoint_path)
+    var_to_shape_map = reader.get_variable_to_shape_map()
+    for key in var_to_shape_map:
+        print("tensor_name: ", key)
+        # print(reader.get_tensor(key))
     saver.restore(sess, ckpt.model_checkpoint_path)
+    print("load vggnet done")
     return sess, saver, net
 
 

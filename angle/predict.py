@@ -23,10 +23,13 @@ def load():
 
 
 ##加载模型
-model = load()
+model = None
 
 
 def predict(path=None, img=None):
+    global model
+    if model is None:
+        model = load()
     """
     图片文字方向预测
     """
