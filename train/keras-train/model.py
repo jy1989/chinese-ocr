@@ -8,11 +8,13 @@ from keras import backend as K
 
 from keras.layers import Lambda
 from keras.optimizers import SGD
-
+import tensorflow as tf
 
 def ctc_lambda_func(args):
     y_pred, labels, input_length, label_length = args
+    # print("cccccccccc:",y_pred,labels,input_length,label_length)
     y_pred = y_pred[:, 2:, :]
+
     return K.ctc_batch_cost(labels, y_pred, input_length, label_length)
 
 
@@ -49,6 +51,7 @@ def get_model(height, nclass):
     labels = Input(name='the_labels', shape=[None, ], dtype='float32')
     input_length = Input(name='input_length', shape=[1], dtype='int64')
     label_length = Input(name='label_length', shape=[1], dtype='int64')
+
     loss_out = Lambda(ctc_lambda_func, output_shape=(1,), name='ctc')([y_pred, labels, input_length, label_length])
     model = Model(inputs=[input, labels, input_length, label_length], outputs=[loss_out])
     sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True, clipnorm=5)

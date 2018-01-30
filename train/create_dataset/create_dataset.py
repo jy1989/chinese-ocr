@@ -22,8 +22,8 @@ def checkImageIsValid(imageBin):
 
 def writeCache(env, cache):
     with env.begin(write=True) as txn:
-        for k, v in cache.iteritems():
-            txn.put(k, v)
+        for k, v in cache.items():
+            txn.put(k.encode(), v)
 
 
 def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkValid=True):
@@ -46,13 +46,13 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
 
     cache = {}
     cnt = 1
-    for i in xrange(nSamples):
+    for i in range(nSamples):
         imagePath = imagePathList[i]
         label = labelList[i]
         if not os.path.exists(imagePath):
             print('%s does not exist' % imagePath)
             continue
-        with open(imagePath, 'r') as f:
+        with open(imagePath, 'rb') as f:
             imageBin = f.read()
         if checkValid:
             if not checkImageIsValid(imageBin):
@@ -62,17 +62,17 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
         imageKey = 'image-%09d' % cnt
         labelKey = 'label-%09d' % cnt
         cache[imageKey] = imageBin
-        cache[labelKey] = label
+        cache[labelKey] = label.encode()
         if lexiconList:
             lexiconKey = 'lexicon-%09d' % cnt
-            cache[lexiconKey] = ' '.join(lexiconList[i])
+            cache[lexiconKey] = ' '.join(lexiconList[i]).encode()
         if cnt % 1000 == 0:
             writeCache(env, cache)
             cache = {}
             print('Written %d / %d' % (cnt, nSamples))
         cnt += 1
     nSamples = cnt - 1
-    cache['num-samples'] = str(nSamples)
+    cache['num-samples'] = str(nSamples).encode()
     writeCache(env, cache)
     print('Created dataset with %d samples' % nSamples)
 
@@ -94,8 +94,7 @@ if __name__ == '__main__':
 
     path = '../data/dataline/*.jpg'
     imagePathList = glob.glob(path)
-    print
-    '------------', len(imagePathList), '------------'
+    print('------------', len(imagePathList), '------------')
     imgLabelLists = []
     for p in imagePathList:
         try:
