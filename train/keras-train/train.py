@@ -21,11 +21,12 @@ random_sample = False
 
 def one_hot(text, length=10, characters=characters):
     label = np.zeros(length)
-    for i, char in enumerate(text.decode('utf-8')):
+    for i, char in enumerate(text):
         index = characters.find(char)
         if index == -1:
             index = characters.find(u' ')
-        label[i] = index
+        if i < length:
+            label[i] = index
     return label
 
 
