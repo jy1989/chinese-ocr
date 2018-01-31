@@ -1,9 +1,9 @@
 import PIL
 import numpy as np
-from ..utils.bbox import bbox_overlaps
 
 from ..fast_rcnn.bbox_transform import bbox_transform
 from ..fast_rcnn.config import cfg
+from ..utils.bbox import bbox_overlaps
 
 
 def prepare_roidb(imdb):

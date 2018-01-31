@@ -10,10 +10,10 @@ import model
 paths = glob('./test/*.*')
 
 if __name__ == '__main__':
-    im = Image.open(paths[1])
+    im = Image.open("./test/002.jpg")
     img = np.array(im.convert('RGB'))
     t = time.time()
-    result, img, angle = model.model(img, model='keras',detectAngle=True)
+    result, img, angle = model.model(img, model='keras', detectAngle=True)
     print("It takes time:{}s".format(time.time() - t))
     print("---------------------------------------")
     for key in result:

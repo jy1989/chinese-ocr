@@ -15,7 +15,6 @@ from torch.utils.data import Dataset
 from torch.utils.data import sampler
 
 
-
 class lmdbDataset(Dataset):
     def __init__(self, root=None, transform=None, target_transform=None):
         self.env = lmdb.open(
@@ -64,7 +63,7 @@ class lmdbDataset(Dataset):
                 img = self.transform(img)
 
             label_key = 'label-%09d' % index
-            label = str(txn.get(label_key.encode()),'utf-8')
+            label = str(txn.get(label_key.encode()), 'utf-8')
 
             if self.target_transform is not None:
                 label = self.target_transform(label)

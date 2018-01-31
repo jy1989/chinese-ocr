@@ -21,6 +21,7 @@ n_len = 10
 
 model, basemodel = get_model(height=imgH, nclass=nclass)
 
+
 def one_hot(text, length=10, characters=characters):
     label = np.zeros(length)
     for i, char in enumerate(text):
@@ -30,6 +31,7 @@ def one_hot(text, length=10, characters=characters):
         if i < length:
             label[i] = index
     return label
+
 
 if random_sample:
     sampler = dataset.randomSequentialSampler(train_dataset, batchSize)
@@ -45,7 +47,6 @@ import os
 modelPath = '../pretrain-models/keras.hdf5'
 if os.path.exists(modelPath):
     basemodel.load_weights(modelPath)
-
 
 train_loader = torch.utils.data.DataLoader(
     train_dataset, batch_size=batchSize,

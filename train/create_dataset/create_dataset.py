@@ -40,8 +40,7 @@ def createDataset(outputPath, imagePathList, labelList, lexiconList=None, checkV
     # print (len(imagePathList) , len(labelList))
     assert (len(imagePathList) == len(labelList))
     nSamples = len(imagePathList)
-    print
-    '...................'
+    print('...................')
     env = lmdb.open(outputPath, map_size=1099511627776)
 
     cache = {}

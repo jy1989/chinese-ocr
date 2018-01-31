@@ -1,4 +1,5 @@
 import numpy as np
+
 from .ctpn.detectors import TextDetector
 from .ctpn.model import ctpn
 from .ctpn.other import draw_boxes

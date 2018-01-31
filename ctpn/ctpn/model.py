@@ -1,6 +1,7 @@
 import sys
 
 import tensorflow as tf
+
 from .cfg import Config
 from .other import resize_im
 

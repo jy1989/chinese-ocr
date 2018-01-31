@@ -1,4 +1,5 @@
 import numpy as np
+
 from .cfg import Config as cfg
 from .other import Graph
 

@@ -5,7 +5,6 @@ from math import *
 import cv2
 import numpy as np
 from PIL import Image
-import sys
 
 sys.path.append("ocr")
 from angle.predict import predict as angle_detect  ##文字方向检测

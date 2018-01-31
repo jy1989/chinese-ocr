@@ -8,7 +8,7 @@ from keras import backend as K
 
 from keras.layers import Lambda
 from keras.optimizers import SGD
-import tensorflow as tf
+
 
 def ctc_lambda_func(args):
     y_pred, labels, input_length, label_length = args
