@@ -8,7 +8,7 @@ pip install -U pillow -i https://pypi.tuna.tsinghua.edu.cn/simple/
 pip install  h5py lmdb mahotas -i https://pypi.tuna.tsinghua.edu.cn/simple/
 conda install pytorch=0.1.12 torchvision -c soumith
 conda install tensorflow=1.3 ##解决cuda报错相关问题
-cd ./ctpn/lib/utils
-sh make-for-cpu.sh
+#cd ./ctpn/lib/utils
+#sh make-for-cpu.sh
 
 
