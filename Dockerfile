@@ -8,7 +8,7 @@ RUN apt-get update -qq \
     # install essentials
 	build-essential \ 
 	# install python 3
-	python3.6 \ 
+	python3.5 \ 
 	python3-dev \
 	python3-pip \ 
 	python3-wheel \ 
