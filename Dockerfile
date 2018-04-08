@@ -1,4 +1,8 @@
 FROM continuumio/anaconda
+RUN apt-get update -qq \
+ && apt-get install gcc -y \
+ && apt-get clean 
+
 WORKDIR /setup/
 COPY ./setup-cpu.sh .
 COPY ./ctpn /setup/ctpn
